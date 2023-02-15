@@ -7,6 +7,51 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="90*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox x:Name="TextField"
+                 Grid.Row="0"
+                 Grid.ColumnSpan="3"
+                 Margin="10">
+        </TextBox>
+
+        <TextBox x:Name="AddressField"
+                 Grid.Row="1"
+                 Grid.Column="0"
+                 Margin="10, 0, 10, 10">
+        </TextBox>
+
+        <Button x:Name="ConnectButton"
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="0, 0, 10, 10">
+            Connect
+        </Button>
+
+        <Border x:Name="ConnectionIndicatior"
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="0, 0, 10, 10">
+            <Rectangle 
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Width="25"
+                       Height="25"
+                       Fill="Red">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Uniform"
+                                 Visual="{StaticResource ResourceKey=ConnectionIcon}"/>
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Border>
     </Grid>
 </Window>

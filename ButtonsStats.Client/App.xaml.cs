@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ButtonsStats.Client.ViewModel;
+using ReactiveUI;
+using Splat;
+using System;
+using System.Reflection;
 using System.Windows;
 
 namespace ButtonsStats.Client
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            new AppBootstrapper();
+
+            MainWindow = new MainWindow();
+            MainWindow.DataContext = new MainViewModel();
+
+            base.OnStartup(e);
+        }
     }
 }

@@ -1,28 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ButtonsStats.Client.ViewModel;
+using ReactiveUI;
+using System.Reactive.Disposables;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ButtonsStats.Client
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IViewFor<MainViewModel>
     {
+        public static readonly DependencyProperty ViewModelProperty = DependencyProperty
+            .Register(nameof(ViewModel), typeof(MainViewModel), typeof(MainWindow));
+
         public MainWindow()
         {
             InitializeComponent();
+            ViewModel = new MainViewModel();
+
+            this.WhenActivated(disposable =>
+            {
+                this.Bind(ViewModel, vm => vm.Text, v => v.TextField.Text)
+                    .DisposeWith(disposable);
+                this.Bind(ViewModel, vm => vm.SocketAddress, v => v.AddressField.Text)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, vm => vm.ConnectCommand, v => v.ConnectButton)
+                    .DisposeWith(disposable);
+            });
+        }
+
+        public MainViewModel? ViewModel 
+        { 
+            get => (MainViewModel?)GetValue(ViewModelProperty);
+            set => SetValue(ViewModelProperty, value);
+        
+        }
+
+        object? IViewFor.ViewModel 
+        { 
+            get => ViewModel;
+            set => ViewModel = (MainViewModel)value;
         }
     }
 }

@@ -8,8 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
+    <PackageReference Include="ReactiveUI.WPF" Version="18.4.20" />
   </ItemGroup>
 
 </Project>

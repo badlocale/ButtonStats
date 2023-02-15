@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:ButtonsStats.Client"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary x:Name="Icons"
+                            Source="view/resources/Icons.xaml"/>
     </Application.Resources>
 </Application>
