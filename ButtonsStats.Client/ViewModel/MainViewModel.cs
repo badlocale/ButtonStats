@@ -1,6 +1,6 @@
 ﻿using ButtonsStats.Client.Api;
-using ButtonsStats.Shared.Model;
 using ButtonsStats.Client.Services;
+using ButtonsStats.Shared.Model;
 using ReactiveUI;
 using Splat;
 using System;
@@ -47,14 +47,14 @@ namespace ButtonsStats.Client.ViewModel
             ConnectCommand = ReactiveCommand.CreateFromTask(
                 () => _connectionService.ConnectAsync(_socketAddress));
 
-            this.WhenAnyValue(vm => vm.Text)
+            IDisposable textAdd = this.WhenAnyValue(vm => vm.Text)
                 .SkipWhile(_ => _connectionService.IsConnected == false)
                 .Buffer(2, 1)
                 .Select(b => (Previous: b[0], Current: b[1]))
                 .Where(b => b.Current.Length > b.Previous.Length)
                 .Subscribe(b => UpdateLastInput(b.Current));
 
-            this.WhenAnyValue(vm => vm.LastInput)
+            IDisposable lastInputUpdate = this.WhenAnyValue(vm => vm.LastInput)
                 .Subscribe(lastInput => _api.SendInputData(lastInput));
         }
 

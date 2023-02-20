@@ -1,17 +1,13 @@
 ﻿using ButtonsStats.Server.Model;
-using ReactiveUI;
-using Splat;
+using ButtonsStats.Shared.Model;
+using DynamicData;
 using OxyPlot;
 using OxyPlot.Series;
+using ReactiveUI;
+using Splat;
 using System;
-using System.Reactive.Linq;
-using DynamicData;
-using System.Drawing;
-using OxyPlot.Axes;
-using ButtonsStats.Shared.Model;
-using System.Collections.Generic;
-using Serilog;
 using System.Linq;
+using System.Reactive.Linq;
 
 namespace ButtonsStats.Server.ViewModel
 {
@@ -51,9 +47,10 @@ namespace ButtonsStats.Server.ViewModel
 
             _inputDataListener.OpenTcpListener();
 
-            IDisposable disposableInputDataUpdate = _inputs
+            IDisposable inputDataUpdate = _inputs
                 .Connect()
-                .Subscribe(_ => OnInputDataUpdated());
+                .Do(_ => UpdateInstantSpeedPlot())
+                .Subscribe(_ => UpdateAverageSpeedPlot());
 
             IDisposable inputRecievedSubscription =
                 Observable.FromEventPattern<DataRecievedEventArgs>(_inputDataListener, "DataRecieved")
@@ -63,14 +60,6 @@ namespace ButtonsStats.Server.ViewModel
         private void OnInputDataRecieved(DataRecievedEventArgs args)
         {
             _inputs.Add(args.InputData);
-        }
-
-        private void OnInputDataUpdated()
-        {
-            UpdateInstantSpeedPlot();
-            UpdateAverageSpeedPlot();
-            InstantSpeedPlotModel.InvalidatePlot(true);
-            AverageSpeedPlotModel.InvalidatePlot(true);
         }
 
         //Instant speed = 1 / interval between two last inputs
@@ -95,6 +84,8 @@ namespace ButtonsStats.Server.ViewModel
 
             DataPoint newInstantSpeedPoint = new DataPoint(_inputCount++, instantSpeed);
             _instantSpeedLine.Points.Add(newInstantSpeedPoint);
+
+            InstantSpeedPlotModel.InvalidatePlot(true);
         }
 
         //Average speed = inputs count / entire time
@@ -119,6 +110,8 @@ namespace ButtonsStats.Server.ViewModel
 
             DataPoint newAverageSpeedPoint = new DataPoint(_inputCount++, averageSpeed);
             _averageSpeedLine.Points.Add(newAverageSpeedPoint);
+
+            AverageSpeedPlotModel.InvalidatePlot(true);
         }
     }
 }

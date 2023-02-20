@@ -1,6 +1,5 @@
 ﻿using ButtonsStats.Client.Api;
 using ButtonsStats.Client.Services;
-using ReactiveUI;
 using Serilog;
 using Splat;
 using Splat.Serilog;

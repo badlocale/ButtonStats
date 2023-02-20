@@ -1,9 +1,4 @@
-﻿using ButtonsStats.Client.ViewModel;
-using ReactiveUI;
-using Splat;
-using System;
-using System.Reflection;
-using System.Windows;
+﻿using System.Windows;
 
 namespace ButtonsStats.Client
 {

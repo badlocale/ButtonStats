@@ -1,8 +1,6 @@
 ﻿using Splat;
 using System;
-using System.Net;
 using System.Net.Sockets;
-using System.Reactive.Linq;
 using System.Threading.Tasks;
 
 namespace ButtonsStats.Client.Services

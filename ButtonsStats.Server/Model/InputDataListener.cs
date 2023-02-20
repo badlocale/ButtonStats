@@ -1,15 +1,13 @@
-﻿using System;
-using System.Net.Sockets;
-using System.Net;
-using Splat;
+﻿using ButtonsStats.Shared.Model;
 using ReactiveUI;
-using System.Runtime.Serialization.Formatters.Binary;
-using ButtonsStats.Shared.Model;
-using System.Windows.Documents;
-using System.Runtime.Serialization;
-using System.Threading.Tasks;
-using System.Threading;
+using Splat;
+using System;
 using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 
 namespace ButtonsStats.Server.Model
 {
