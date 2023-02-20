@@ -50,7 +50,10 @@ namespace ButtonsStats.Client.ViewModel
 
             this.WhenAnyValue(vm => vm.Text)
                 .SkipWhile(_ => _connectionService.IsConnected == false)
-                .Subscribe(text => UpdateLastInput(text));
+                .Buffer(2, 1)
+                .Select(b => (Previous: b[0], Current: b[1]))
+                .Where(b => b.Current.Length > b.Previous.Length)
+                .Subscribe(b => UpdateLastInput(b.Current));
 
             this.WhenAnyValue(vm => vm.LastInput)
                 .Subscribe(lastInput => _api.SendInputData(lastInput));
@@ -58,6 +61,7 @@ namespace ButtonsStats.Client.ViewModel
 
         private void UpdateLastInput(string text)
         {
+            this.Log().Debug("Input data updated.");
             if (!string.IsNullOrEmpty(text))
             {
                 LastInput = new InputData(text.Last(), DateTime.Now);

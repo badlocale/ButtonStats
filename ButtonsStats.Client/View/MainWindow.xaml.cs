@@ -30,7 +30,6 @@ namespace ButtonsStats.Client
         { 
             get => (MainViewModel?)GetValue(ViewModelProperty);
             set => SetValue(ViewModelProperty, value);
-        
         }
 
         object? IViewFor.ViewModel 

@@ -41,7 +41,7 @@ namespace ButtonsStats.Client.Services
             }
             catch (Exception e)
             {
-                this.Log().Error(e);
+                this.Log().Error("Host not availible or an incorrect address format.", e);
                 return false;
             }
         }

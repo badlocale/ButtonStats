@@ -17,5 +17,10 @@ namespace ButtonsStats.Shared.Model
             KeyPressed = keyPressed;
             InputTime = inputTime;
         }
+
+        public override string ToString()
+        {
+            return $"Char: {KeyPressed}, Time: {InputTime}";
+        }
     }
 }

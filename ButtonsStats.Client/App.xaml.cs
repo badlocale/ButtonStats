@@ -12,10 +12,6 @@ namespace ButtonsStats.Client
         protected override void OnStartup(StartupEventArgs e)
         {
             new AppBootstrapper();
-
-            MainWindow = new MainWindow();
-            MainWindow.DataContext = new MainViewModel();
-
             base.OnStartup(e);
         }
     }

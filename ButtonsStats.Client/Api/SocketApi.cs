@@ -23,7 +23,8 @@ namespace ButtonsStats.Client.Api
 
         public bool SendInputData(InputData inputData)
         {
-            if (_connectionService.TcpClient.Connected)
+            if (_connectionService.TcpClient != null &&
+                _connectionService.TcpClient.Connected)
             {
                 NetworkStream stream = _connectionService.TcpClient.GetStream();
                 BinaryFormatter bf = new();

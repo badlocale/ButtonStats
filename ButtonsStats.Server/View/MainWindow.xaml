@@ -3,8 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:local="clr-namespace:ButtonsStats.Server"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0"
+                BorderThickness="1" 
+                BorderBrush="Black">
+            <oxy:PlotView x:Name="InstantSpeedPlot"/>
+        </Border>
+        
+        <Border Grid.Row="1"
+                BorderThickness="1" 
+                BorderBrush="Black">
+            <oxy:PlotView x:Name="AverageSpeedPlot"/>
+        </Border>
+    </Grid>
 </Window>

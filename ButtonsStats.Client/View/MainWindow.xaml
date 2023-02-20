@@ -21,7 +21,8 @@
         <TextBox x:Name="TextField"
                  Grid.Row="0"
                  Grid.ColumnSpan="3"
-                 Margin="10">
+                 Margin="10"
+                 TextWrapping="Wrap">
         </TextBox>
 
         <TextBox x:Name="AddressField"
