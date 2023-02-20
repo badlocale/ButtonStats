@@ -9,17 +9,25 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="50*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="45*"/>
         </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontSize="20">
+            The graphs show only the <Bold>last 50</Bold> inputs.
+        </TextBlock>
         
-        <Border Grid.Row="0"
+        <Border Grid.Row="1"
                 BorderThickness="1" 
                 BorderBrush="Black">
             <oxy:PlotView x:Name="InstantSpeedPlot"/>
         </Border>
         
-        <Border Grid.Row="1"
+        <Border Grid.Row="2"
                 BorderThickness="1" 
                 BorderBrush="Black">
             <oxy:PlotView x:Name="AverageSpeedPlot"/>

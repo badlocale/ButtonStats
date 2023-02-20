@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ButtonsStats.Shared.Model
+﻿namespace ButtonsStats.Shared.Model
 {
     [Serializable]
     public class InputData

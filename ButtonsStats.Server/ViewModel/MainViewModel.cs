@@ -10,17 +10,19 @@ using System.Drawing;
 using OxyPlot.Axes;
 using ButtonsStats.Shared.Model;
 using System.Collections.Generic;
+using Serilog;
+using System.Linq;
 
 namespace ButtonsStats.Server.ViewModel
 {
-    public class MainViewModel : ReactiveObject
+    public class MainViewModel : ReactiveObject, IEnableLogger
     {
         private IInputDataListener _inputDataListener;
 
+        private SourceList<InputData> _inputs = new();
+        private int _inputCount = 0;
         private LineSeries _instantSpeedLine;
         private LineSeries _averageSpeedLine;
-        private List<InputData> _inputs = new();
-        private int _inputCount = 0;
 
         public PlotModel InstantSpeedPlotModel { get; }
         public PlotModel AverageSpeedPlotModel { get; }
@@ -29,7 +31,7 @@ namespace ButtonsStats.Server.ViewModel
         {
             _inputDataListener = Locator.Current.GetService<IInputDataListener>();
 
-            InstantSpeedPlotModel = new PlotModel { Title = "Instant speed" };
+            InstantSpeedPlotModel = new PlotModel { Title = "Instant speed (symbols/sec)." };
             _instantSpeedLine = new LineSeries()
             {
                 Color = OxyColors.Blue,
@@ -38,7 +40,7 @@ namespace ButtonsStats.Server.ViewModel
             };
             InstantSpeedPlotModel.Series.Add(_instantSpeedLine);
 
-            AverageSpeedPlotModel = new PlotModel { Title = "Average speed" };
+            AverageSpeedPlotModel = new PlotModel { Title = "Average speed (symbols/sec)." };
             _averageSpeedLine = new LineSeries()
             {
                 Color = OxyColors.Red,
@@ -49,6 +51,10 @@ namespace ButtonsStats.Server.ViewModel
 
             _inputDataListener.OpenTcpListener();
 
+            IDisposable disposableInputDataUpdate = _inputs
+                .Connect()
+                .Subscribe(_ => OnInputDataUpdated());
+
             IDisposable inputRecievedSubscription =
                 Observable.FromEventPattern<DataRecievedEventArgs>(_inputDataListener, "DataRecieved")
                 .Subscribe(a => OnInputDataRecieved(a.EventArgs));
@@ -57,19 +63,24 @@ namespace ButtonsStats.Server.ViewModel
         private void OnInputDataRecieved(DataRecievedEventArgs args)
         {
             _inputs.Add(args.InputData);
+        }
+
+        private void OnInputDataUpdated()
+        {
             UpdateInstantSpeedPlot();
             UpdateAverageSpeedPlot();
             InstantSpeedPlotModel.InvalidatePlot(true);
             AverageSpeedPlotModel.InvalidatePlot(true);
         }
 
-        //Instant speed = 1 / timeInterval
+        //Instant speed = 1 / interval between two last inputs
         private void UpdateInstantSpeedPlot()
         {
             double instantSpeed;
             if (_inputs.Count > 1)
             {
-                TimeSpan dt = _inputs[^1].InputTime - _inputs[^2].InputTime;
+                TimeSpan dt = _inputs.Items.Last().InputTime - 
+                    _inputs.Items.ElementAt(_inputs.Items.Count() - 2).InputTime;
                 instantSpeed = (1 / dt.TotalMilliseconds) * 1000;
             }
             else
@@ -92,7 +103,8 @@ namespace ButtonsStats.Server.ViewModel
             double averageSpeed;
             if (_inputs.Count > 1)
             {
-                TimeSpan entireTime = _inputs[^1].InputTime - _inputs[0].InputTime;
+                TimeSpan entireTime = _inputs.Items.Last().InputTime - 
+                    _inputs.Items.First().InputTime;
                 averageSpeed = (_inputs.Count / entireTime.TotalMilliseconds) * 1000;
             }
             else

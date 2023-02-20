@@ -5,7 +5,6 @@ using ReactiveUI;
 using Splat;
 using System;
 using System.Linq;
-using System.Net;
 using System.Reactive;
 using System.Reactive.Linq;
 
