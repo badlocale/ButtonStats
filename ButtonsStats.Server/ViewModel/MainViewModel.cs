@@ -54,12 +54,7 @@ namespace ButtonsStats.Server.ViewModel
 
             IDisposable inputRecievedSubscription =
                 Observable.FromEventPattern<DataRecievedEventArgs>(_inputDataListener, "DataRecieved")
-                .Subscribe(a => OnInputDataRecieved(a.EventArgs));
-        }
-
-        private void OnInputDataRecieved(DataRecievedEventArgs args)
-        {
-            _inputs.Add(args.InputData);
+                .Subscribe(a => _inputs.Add(a.EventArgs.InputData));
         }
 
         //Instant speed = 1 / interval between two last inputs

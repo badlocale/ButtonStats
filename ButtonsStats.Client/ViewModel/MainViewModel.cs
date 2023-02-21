@@ -56,7 +56,7 @@ namespace ButtonsStats.Client.ViewModel
 
             IDisposable textAdd = this.WhenAnyValue(vm => vm.Text)
                 .Do(_ => IsConnected = _connectionService.IsConnected)
-                .SkipWhile(_ => _connectionService.IsConnected == false)
+                .SkipWhile(_ => IsConnected == false)
                 .Buffer(2, 1)
                 .Select(b => (Previous: b[0], Current: b[1]))
                 .Where(b => b.Current.Length > b.Previous.Length)

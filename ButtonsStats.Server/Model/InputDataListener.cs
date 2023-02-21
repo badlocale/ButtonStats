@@ -13,7 +13,7 @@ namespace ButtonsStats.Server.Model
 {
     public class InputDataListener : IInputDataListener, IEnableLogger
     {
-        public event EventHandler<DataRecievedEventArgs> DataRecieved;
+        public event EventHandler<DataRecievedEventArgs>? DataRecieved;
 
         public async void OpenTcpListener()
         {
@@ -21,19 +21,22 @@ namespace ButtonsStats.Server.Model
             TcpListener tcpListener = new TcpListener(localAddr, 8080);
             try
             {
-                tcpListener.Start();
-                this.Log().Info($"Listener started on address: {tcpListener.LocalEndpoint}. Wait for connection.");
-
-                TcpClient tcpClient = await tcpListener.AcceptTcpClientAsync();
-                this.Log().Info($"Connected client with IP: {tcpClient.Client.LocalEndPoint}.");
-
-                NetworkStream stream = tcpClient.GetStream();
-                BinaryFormatter bf = new();
-                new Thread(_ =>
+                new Thread(async _ =>
                 {
+                    tcpListener.Start();
+                    this.Log().Info($"Listener started on address: {tcpListener.LocalEndpoint}. Wait for connection.");
+
                     while (true)
                     {
-                        ReadInputDataFromStream(stream, bf);
+                        TcpClient tcpClient = await tcpListener.AcceptTcpClientAsync();
+                        this.Log().Info($"Connected client with IP: {tcpClient.Client.LocalEndPoint}.");
+
+                        NetworkStream stream = tcpClient.GetStream();
+                        BinaryFormatter bf = new();
+                        while (true)
+                        {
+                            ReadInputDataFromStream(stream, bf);
+                        }
                     }
                 }).Start();
             }
@@ -52,9 +55,9 @@ namespace ButtonsStats.Server.Model
                 OnDataRecieved(new DataRecievedEventArgs(inputData));
                 this.Log().Info($"Data recieved: {inputData}.");
             }
-            catch (Exception e)
+            catch
             {
-                this.Log().Error(e, $"Connection is broken during getting data.");
+                throw;
             }
         }
 
