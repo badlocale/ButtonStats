@@ -46,9 +46,16 @@ namespace ButtonsStats.Server.Model
 
         private void ReadInputDataFromStream(Stream stream, IFormatter formatter)
         {
-            InputData inputData = (InputData)formatter.Deserialize(stream);
-            OnDataRecieved(new DataRecievedEventArgs(inputData));
-            this.Log().Info($"Data recieved: {inputData.ToString()}.");
+            try
+            {
+                InputData inputData = (InputData)formatter.Deserialize(stream);
+                OnDataRecieved(new DataRecievedEventArgs(inputData));
+                this.Log().Info($"Data recieved: {inputData.ToString()}.");
+            }
+            catch (Exception e)
+            {
+                this.Log().Info($"Connection is broken during getting data.", e);
+            }
         }
 
         private void OnDataRecieved(DataRecievedEventArgs args)

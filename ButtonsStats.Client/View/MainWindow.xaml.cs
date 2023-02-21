@@ -2,6 +2,7 @@
 using ReactiveUI;
 using System.Reactive.Disposables;
 using System.Windows;
+using System.Windows.Media;
 
 namespace ButtonsStats.Client
 {
@@ -21,6 +22,9 @@ namespace ButtonsStats.Client
                     .DisposeWith(disposable);
                 this.Bind(ViewModel, vm => vm.SocketAddress, v => v.AddressField.Text)
                     .DisposeWith(disposable);
+                this.Bind(ViewModel, vm => vm.IsConnected, v => v.ConnectionIcon.Fill, 
+                    vmToViewConverter: BooleanToBrushConverterFunc, viewToVmConverter: BrushToBooleanConverterFunc)
+                    .DisposeWith(disposable);
                 this.BindCommand(ViewModel, vm => vm.ConnectCommand, v => v.ConnectButton)
                     .DisposeWith(disposable);
             });
@@ -36,6 +40,31 @@ namespace ButtonsStats.Client
         { 
             get => ViewModel;
             set => ViewModel = (MainViewModel)value;
+        }
+
+        private Brush BooleanToBrushConverterFunc(bool tumbler)
+        {
+            if (tumbler)
+            {
+                return new SolidColorBrush(Colors.Green);
+            }
+            else
+            {
+                return new SolidColorBrush(Colors.Red);
+            }
+        }
+
+        private bool BrushToBooleanConverterFunc(Brush brush)
+        {
+            SolidColorBrush solidColorBrush = brush as SolidColorBrush;
+            if (solidColorBrush == null || solidColorBrush.Color != Colors.Green)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

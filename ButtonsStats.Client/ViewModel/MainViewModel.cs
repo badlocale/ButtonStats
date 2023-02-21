@@ -18,6 +18,7 @@ namespace ButtonsStats.Client.ViewModel
         private InputData _lastInput;
         private string _text;
         private string _socketAddress;
+        private bool _isConnected;
 
         public InputData LastInput
         {
@@ -37,6 +38,12 @@ namespace ButtonsStats.Client.ViewModel
             set { this.RaiseAndSetIfChanged(ref _socketAddress, value); }
         }
 
+        public bool IsConnected
+        {
+            get { return _isConnected; }
+            set { this.RaiseAndSetIfChanged(ref _isConnected, value); }
+        }
+
         public ReactiveCommand<Unit, bool> ConnectCommand { get; }
 
         public MainViewModel()
@@ -48,6 +55,7 @@ namespace ButtonsStats.Client.ViewModel
                 () => _connectionService.ConnectAsync(_socketAddress));
 
             IDisposable textAdd = this.WhenAnyValue(vm => vm.Text)
+                .Do(_ => IsConnected = _connectionService.IsConnected)
                 .SkipWhile(_ => _connectionService.IsConnected == false)
                 .Buffer(2, 1)
                 .Select(b => (Previous: b[0], Current: b[1]))
