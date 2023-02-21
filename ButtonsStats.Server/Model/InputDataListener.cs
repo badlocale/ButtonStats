@@ -40,7 +40,7 @@ namespace ButtonsStats.Server.Model
             catch (Exception e)
             {
                 tcpListener.Stop();
-                this.Log().Info($"Server stoped.", e);
+                this.Log().Info(e, $"Server stoped.");
             }
         }
 
@@ -50,11 +50,11 @@ namespace ButtonsStats.Server.Model
             {
                 InputData inputData = (InputData)formatter.Deserialize(stream);
                 OnDataRecieved(new DataRecievedEventArgs(inputData));
-                this.Log().Info($"Data recieved: {inputData.ToString()}.");
+                this.Log().Info($"Data recieved: {inputData}.");
             }
             catch (Exception e)
             {
-                this.Log().Info($"Connection is broken during getting data.", e);
+                this.Log().Error(e, $"Connection is broken during getting data.");
             }
         }
 
