@@ -1,9 +1,9 @@
-﻿using ButtonsStats.Server.Model;
+﻿using ButtonStats.Server.Model;
 using Serilog;
 using Splat;
 using Splat.Serilog;
 
-namespace ButtonsStats.Server
+namespace ButtonStats.Server
 {
     public class AppBootstrapper
     {

@@ -1,4 +1,4 @@
-﻿namespace ButtonsStats.Shared.Model
+﻿namespace ButtonStats.Shared.Model
 {
     [Serializable]
     public class InputData

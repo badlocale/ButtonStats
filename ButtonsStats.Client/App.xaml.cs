@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace ButtonsStats.Client
+namespace ButtonStats.Client
 {
     public partial class App : Application
     {

@@ -1,10 +1,10 @@
-﻿using ButtonsStats.Client.ViewModel;
+﻿using ButtonStats.Client.ViewModel;
 using ReactiveUI;
 using System.Reactive.Disposables;
 using System.Windows;
 using System.Windows.Media;
 
-namespace ButtonsStats.Client
+namespace ButtonStats.Client
 {
     public partial class MainWindow : Window, IViewFor<MainViewModel>
     {

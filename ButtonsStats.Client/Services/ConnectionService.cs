@@ -4,7 +4,7 @@ using System;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
-namespace ButtonsStats.Client.Services
+namespace ButtonStats.Client.Services
 {
     public class ConnectionService : IConnectionService, IEnableLogger
     {

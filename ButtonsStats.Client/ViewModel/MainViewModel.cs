@@ -1,6 +1,6 @@
-﻿using ButtonsStats.Client.Api;
-using ButtonsStats.Client.Services;
-using ButtonsStats.Shared.Model;
+﻿using ButtonStats.Client.Api;
+using ButtonStats.Client.Services;
+using ButtonStats.Shared.Model;
 using ReactiveUI;
 using Splat;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 
-namespace ButtonsStats.Client.ViewModel
+namespace ButtonStats.Client.ViewModel
 {
     public class MainViewModel : ReactiveObject
     {

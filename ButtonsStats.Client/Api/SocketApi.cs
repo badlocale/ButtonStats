@@ -1,11 +1,11 @@
-﻿using ButtonsStats.Client.Services;
-using ButtonsStats.Shared.Model;
+﻿using ButtonStats.Client.Services;
+using ButtonStats.Shared.Model;
 using Splat;
 using System;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace ButtonsStats.Client.Api
+namespace ButtonStats.Client.Api
 {
     public class SocketApi : IApi, IEnableLogger
     {

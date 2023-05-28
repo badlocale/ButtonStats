@@ -1,8 +1,8 @@
-﻿using ButtonsStats.Server.ViewModel;
+﻿using ButtonStats.Server.ViewModel;
 using ReactiveUI;
 using System.Windows;
 
-namespace ButtonsStats.Server
+namespace ButtonStats.Server
 {
     public partial class MainWindow : Window, IViewFor<MainViewModel>
     {

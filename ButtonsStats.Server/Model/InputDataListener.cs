@@ -1,4 +1,4 @@
-﻿using ButtonsStats.Shared.Model;
+﻿using ButtonStats.Shared.Model;
 using ReactiveUI;
 using Splat;
 using System;
@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 
-namespace ButtonsStats.Server.Model
+namespace ButtonStats.Server.Model
 {
     public class InputDataListener : IInputDataListener, IEnableLogger
     {

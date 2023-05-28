@@ -1,5 +1,5 @@
-﻿using ButtonsStats.Server.Model;
-using ButtonsStats.Shared.Model;
+﻿using ButtonStats.Server.Model;
+using ButtonStats.Shared.Model;
 using DynamicData;
 using OxyPlot;
 using OxyPlot.Series;
@@ -9,7 +9,7 @@ using System;
 using System.Linq;
 using System.Reactive.Linq;
 
-namespace ButtonsStats.Server.ViewModel
+namespace ButtonStats.Server.ViewModel
 {
     public class MainViewModel : ReactiveObject, IEnableLogger
     {

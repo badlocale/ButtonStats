@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ButtonsStats.Server.Model
+namespace ButtonStats.Server.Model
 {
     public interface IInputDataListener
     {

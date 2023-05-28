@@ -1,7 +1,7 @@
-﻿using ButtonsStats.Shared.Model;
+﻿using ButtonStats.Shared.Model;
 using System;
 
-namespace ButtonsStats.Server.Model
+namespace ButtonStats.Server.Model
 {
     public class DataRecievedEventArgs : EventArgs
     {

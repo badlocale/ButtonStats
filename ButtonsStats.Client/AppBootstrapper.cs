@@ -1,10 +1,10 @@
-﻿using ButtonsStats.Client.Api;
-using ButtonsStats.Client.Services;
+﻿using ButtonStats.Client.Api;
+using ButtonStats.Client.Services;
 using Serilog;
 using Splat;
 using Splat.Serilog;
 
-namespace ButtonsStats.Client
+namespace ButtonStats.Client
 {
     public class AppBootstrapper
     {

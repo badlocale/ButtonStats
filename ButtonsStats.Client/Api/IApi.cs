@@ -1,6 +1,6 @@
-﻿using ButtonsStats.Shared.Model;
+﻿using ButtonStats.Shared.Model;
 
-namespace ButtonsStats.Client.Api
+namespace ButtonStats.Client.Api
 {
     public interface IApi
     {
