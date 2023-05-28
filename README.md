@@ -3,9 +3,9 @@ ButtonStats is a socket client-server app for collecting statistics on instant a
 
 The application was written to study the :rocket:**reactive**:rocket: style in interface development. As a reactive library, I used a ReactiveUI combined with WPF.
 #### Client side
-![image](https://github.com/badlocale/ButtonsStats/assets/95579070/8ba662a9-c4c3-4ae5-a39d-79bff86faeaa)
+![image](https://github.com/badlocale/ButtonStats/assets/95579070/8d4d5017-d3b2-4352-ab4c-f42673b7911a)
 #### Server side
-![image](https://github.com/badlocale/ButtonsStats/assets/95579070/f1f4589b-cd47-4763-a236-cae8527ca100)
+![image](https://github.com/badlocale/ButtonStats/assets/95579070/9f7196fe-93cc-4806-a305-96e96f60a64e)
 # How to use
 0. Run both parts of the application(server, client).
 1. Enter the server address with port 80 at the bottom of the client window.
