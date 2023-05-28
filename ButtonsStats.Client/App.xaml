@@ -1,9 +1,0 @@
-﻿<Application x:Class="ButtonsStats.Client.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="View/MainWindow.xaml">
-    <Application.Resources>
-        <ResourceDictionary x:Name="Icons"
-                            Source="view/resources/Icons.xaml"/>
-    </Application.Resources>
-</Application>
